@@ -13,7 +13,9 @@ export class UserListPage implements OnInit {
 @ViewChild(IonInfiniteScroll) infiniteScroll:IonInfiniteScroll;
 
 
-  characters=[];
+  characters=[
+
+  ];
   charactersAdd=[];
   next='';
 
