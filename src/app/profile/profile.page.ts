@@ -9,8 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  id:string;
-  character=[];
+  idPage:string;
+  character;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -18,9 +18,9 @@ export class ProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
-     this.id= this.activatedRoute.snapshot.paramMap.get('id')
+     this.idPage= this.activatedRoute.snapshot.paramMap.get('id')
 
-    this.http.get<any>("https://rickandmortyapi.com/api/character/"+this.id)
+    this.http.get<any>("https://rickandmortyapi.com/api/character/"+this.idPage)
     .subscribe(resp=>{
       console.log(resp)
       this.character=resp;
