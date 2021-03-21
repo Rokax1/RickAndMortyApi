@@ -19,14 +19,27 @@
         <ion-card class="ion-text-center">
 
           <img src='{{character.image}}'>
-          <ion-card-header>
+          <ion-card-header >
             <ion-card-title>{{character.name}}</ion-card-title>
             <ion-card-subtitle>
               <p>
-              species : {{character.species}}
+              species :
+              <ion-chip >
+                <ion-label>{{character.species}}</ion-label>
+              </ion-chip>
             </p>
             <p>
               origin:  {{character.origin.name}}
+            </p>
+            <p>
+              Status:
+              <ng-container *ngIf="character.status == 'Alive'; else Dead">
+                <ion-chip color="success" >
+                  <ion-label>{{character.status}}</ion-label>
+                </ion-chip>
+              </ng-container>
+
+
             </p>
             </ion-card-subtitle>
           </ion-card-header>
@@ -46,3 +59,10 @@
 <ng-template #load>
   <ion-progress-bar type="indeterminate"></ion-progress-bar>
 </ng-template>
+
+<ng-template #Dead>
+  <ion-chip color="danger" >
+    <ion-label>{{character.status}}</ion-label>
+  </ion-chip>
+</ng-template>
+
