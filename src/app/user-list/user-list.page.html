@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Characters</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-grid >
+  <ion-row>
+    <ion-col   sizeMd="4"  sizeXl="4" offsetXl="4" offsetMd="4">
+      <ion-list *ngFor="let character of characters" [routerLink]="['/profile/'+character.id]" routerLinkActive="router-link-active" >
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="{{character.image}}">
+          </ion-avatar>
+          <ion-label>
+           <h2>{{character.name}}</h2>
+            <p>{{character.species}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<ion-infinite-scroll threshold="150px" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+
+
+</ion-content>
