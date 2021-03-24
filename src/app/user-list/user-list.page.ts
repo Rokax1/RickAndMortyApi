@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { CharacterService } from '../Services/character.service';
+import { Character } from '../Models/character';
 
 
 @Component({
@@ -13,9 +15,7 @@ export class UserListPage implements OnInit {
 @ViewChild(IonInfiniteScroll) infiniteScroll:IonInfiniteScroll;
 
 
-  characters=[
-
-  ];
+  characters: Character[];
   charactersAdd=[];
   next='';
 
@@ -23,22 +23,20 @@ export class UserListPage implements OnInit {
 
 
   constructor(
-   private http : HttpClient
+   private http : HttpClient,
+   private _characterService : CharacterService
   ) { }
 
   ngOnInit() {
 
-
-    this.http.get<any>("https://rickandmortyapi.com/api/character")
-      .subscribe(resp=>{
-        this.next=resp.info.next;
-        this.total=resp.info.count;
-        this.characters= resp.results
-        console.log(this.characters)
-        console.log(this.next)
-
-
-      });
+    this._characterService.getCharacter().subscribe(
+    resp=>{
+     // console.log(resp)
+      this.characters=resp;
+      console.log(this.characters)
+    },error=>{
+      console.log(error);
+    })
 
   }
 
